@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="bg-white p-5">
-    <livewire:customer-table />
+    <livewire:customer-table>
 </div>
 
 @endsection
