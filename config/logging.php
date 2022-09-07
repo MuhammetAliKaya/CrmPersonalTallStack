@@ -63,6 +63,12 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'errorrec' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/errors.log'),
+            'level' => env('LOG_LEVEL', 'error'),
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
@@ -106,7 +112,8 @@ return [
 
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'path' => storage_path('logs/errore.log'),
+            'level' => env('LOG_LEVEL', 'error'),
         ],
 
         'null' => [
@@ -115,7 +122,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/emergency.log'),
         ],
     ],
 

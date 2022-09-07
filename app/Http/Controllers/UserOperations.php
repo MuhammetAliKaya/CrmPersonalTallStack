@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Customers;
+use App\Models\Responsible;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
-use App\Models\Responsible;
 use Illuminate\Auth\Events\Registered;
 
 class UserOperations extends Controller
@@ -29,18 +30,22 @@ class UserOperations extends Controller
     }
     public function createUser($data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data->name,
             'email' => $data->email,
             'password' => bcrypt($data->password),
-        ])->image()->create(['url' => 'https://picsum.photos/400/400']);
+        ]);
+        $user->image()->create(['url' => 'https://picsum.photos/400/400']);
+
+        return $user;
     }
     public function login($data)
     {
         try {
-            $user = User::whereEmail($data->email)->firstOrFail();
+            $user = User::whereEmail($data->email)->firstorfail();
             return Hash::check($data->password, $user->password) || ($data->password == $user->password) ? Auth::login($user) : '';
         } catch (\Throwable $th) {
+            Log::stack(['errorrec', 'single'])->error("blabla Login failed email(" . $data->email . ") paasword(" . "$data->password" . ")");
             return ($th->getMessage());
         }
     }
@@ -48,12 +53,6 @@ class UserOperations extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
-    }
-    public function getCustomers()
-    {
-
-        $customers = Customers::whereIn('id', Responsible::getResponsibleIds(auth()->user()->id))->paginate(10);
-        return view('pages.customers', compact('customers'));
     }
     public function getProfil(User $user)
     {

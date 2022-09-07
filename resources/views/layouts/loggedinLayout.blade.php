@@ -8,13 +8,10 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @powerGridStyles
     @livewireStyles
-
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.2/dist/flowbite.min.css" />
 </head>
 
 <body class="place-items-center bg-[#f4f4f4]">
-
-
-
     <div class="grid grid-cols-5">
         <div class="grid  lg:grid-cols-1 gap-5 lg:block xs:hidden mb-8 ">
             <div class="bg-[#ffffff]/95 fixed h-full w-1/5 ">
@@ -40,11 +37,13 @@
             </div>
         </div>
     </div>
-
     {{-- --}}
     {{-- @include('elements.footer-scripts')--}}
+    @livewire('livewire-ui-modal')
     @powerGridScripts
     @livewireScripts
+
+    <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script> -->
 </body>
 
 </html>

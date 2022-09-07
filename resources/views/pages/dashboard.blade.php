@@ -2,7 +2,14 @@
 
 
 @section('content')
-<div class="grid grid-cols-2 gap-10">
+<div class="bg-[#ffffff] py-4 px-3 mt-10">
+    <div class="grid grid-cols-1">
+        @if(auth()->user()->email=='a')
+        @include('elements.notificationShow')
+        @endif
+    </div>
+</div>
+<div class="grid grid-cols-2 gap-10 mt-10">
     <div class="bg-[#ffffff] py-4 px-3">
         <div class="grid grid-cols-1">
 

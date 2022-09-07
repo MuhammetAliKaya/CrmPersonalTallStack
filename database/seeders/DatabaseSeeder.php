@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
 
         //seed user and customeer 
         \App\Models\User::factory(50)->has(Image::factory())->create()->map(fn ($user) => $user->assignRole($arr[rand(0, 3)]));
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             \App\Models\Customers::factory(50)->has(Image::factory())->create()->map(fn ($customer) => $customer->responsible()->create(['reponsibleById' => User::inRandomOrder()
                 ->limit(1)->first()->id]));
             info('50 yeni kayıt eklendi' . $i . '. adım');
