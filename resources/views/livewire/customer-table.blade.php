@@ -1,6 +1,7 @@
 <div>
     <div>
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg p-2">
+            <!-- show error -->
             @if ($errors->any())
             <div class="alert alert-danger bg-red-200 my-2 p-2 rounded-lg">
                 <ul>
